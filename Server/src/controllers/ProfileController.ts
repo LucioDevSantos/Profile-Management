@@ -31,7 +31,7 @@ class ProfileController{
 
         const LoginProfile = new loginProfile()
 
-        const result = LoginProfile.execute({email, password})
+        const result = await LoginProfile.execute({email, password})
 
         res.send(result)
     }

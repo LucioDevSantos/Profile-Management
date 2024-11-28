@@ -10,17 +10,24 @@ interface loginProps{
 class loginProfile {
     async execute({email, password}: loginProps){
 
-        const found = prismaClient.profile.findFirst({
+        const found = await prismaClient.profile.findFirst({
             where: {
                 email: email
             }
         })
         if(!found){
-             throw new Error("profile no found")
+             return "profile not found"
         } 
 
+        const result = ():string => {
+            if(password != found.password){
+                return "password incorrect"
+            }
+
+            return "login successful!"
+        }
         
-        
+        return result
     }
 }
 
